@@ -37,14 +37,30 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+        // Example taken from: http://plugins.cordova.io/#/package/org.apache.cordova.geolocation
+        
+        // onSuccess Callback
+        //   This method accepts a `Position` object, which contains
+        //   the current GPS coordinates
+        //
+        function onSuccess(position) {
+            var element = document.getElementById('geolocation');
+            element.innerHTML = 'Latitude: '  + position.coords.latitude      + '<br />' +
+                                'Longitude: ' + position.coords.longitude     + '<br />' +
+                                '<hr />'      + element.innerHTML;
+        }
 
-        console.log('Received Event: ' + id);
+        // onError Callback receives a PositionError object
+        //
+        function onError(error) {
+            console.log('code: '    + error.code    + '\n' +
+                  'message: ' + error.message + '\n');
+        }
+
+        // Options: throw an error if no update is received every 30 seconds.
+        //
+        var watchID = navigator.geolocation.watchPosition(onSuccess, onError, { timeout: 30000 });
     }
 };
 
