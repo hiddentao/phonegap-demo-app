@@ -1,4 +1,4 @@
-platforms/
-plugins/
-www/
+platforms/*
+plugins/*
+www/*
 node_modules
