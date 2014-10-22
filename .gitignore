@@ -2,5 +2,5 @@ platforms/android
 platforms/*
 plugins/org*
 plugins/*
-www/*
+www/
 node_modules
